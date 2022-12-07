@@ -30,7 +30,7 @@ def solve(data):
     root = dir(None, "/")
     i = 0
     while i < len(data):
-        if " cd " in data[i]:
+        if data[i].split(" ")[1] == "cd":
             name = data[i].split(" ")[-1]
             if name == "/":
                 curr = root
@@ -40,10 +40,11 @@ def solve(data):
                 for d in curr.children:
                     if d.name == name:
                         curr = d
-        if " ls" in data[i]:
+                        break
+        else:
             i += 1
             while "$" not in data[i] and i < len(data):
-                if "dir" in data[i]:
+                if data[i].split(" ")[0] == "dir":
                     curr.children.append(dir(curr, data[i].split(" ")[-1]))
                 else:
                     curr.files.append(file(*data[i].split(" ")))
