@@ -24,7 +24,7 @@ def solve(data):
 
     for _ in range(10000):
         for m in monkeys:
-            for i, item in enumerate(monkeys[m]["items"]):
+            for item in monkeys[m]["items"]:
                 score[m] += 1
                 old = item
                 # new = eval(monkeys[m]["operation"]) // 3
