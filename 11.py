@@ -8,7 +8,9 @@ def get_input():
 
 
 class monkey:
-    def __init__(self, items: list, op: str, test: str, m1: int, m2: int) -> None:
+    def __init__(
+        self, items: list, op: str, test: str, m1: int, m2: int
+    ) -> None:
         self.items = items
         self.op = op
         self.test = test
