@@ -1,3 +1,4 @@
+import time
 from itertools import product
 
 
@@ -18,19 +19,17 @@ def solve(data):
             rocks |= set(
                 product(range(min_x, max_x + 1), range(min_y, max_y + 1))
             )
-    # brute force, tar ca en halvtimme
-    # kör koden om det är kallt hemma :)
     max_y = max(rocks, key=(lambda x: x[1]))[1]
     rocks |= set((x, max_y + 2) for x in range(0, 1000))
-    sand = set()
+    all = set(x for x in rocks)
     current_sand = (500, 0)
-    while (500, 0) not in sand:
+    while (500, 0) not in all:
         x, y = current_sand
-        if (x, y + 1) in (rocks | sand):
-            if (x - 1, y + 1) in (rocks | sand):
-                if (x + 1, y + 1) in (rocks | sand):
-                    sand.add((x, y))
-                    min_sand = min(sand, key=(lambda x: x[1]))[1]
+        if (x, y + 1) in (all):
+            if (x - 1, y + 1) in (all):
+                if (x + 1, y + 1) in (all):
+                    all.add((x, y))
+                    min_sand = min(all, key=(lambda x: x[1]))[1]
                     current_sand = (500, min_sand - 1)
                 else:
                     current_sand = (x + 1, y + 1)
@@ -38,8 +37,10 @@ def solve(data):
                 current_sand = (x - 1, y + 1)
         else:
             current_sand = (x, y + 1)
-    print(f"Part 2: {len(sand)}")
+    print(f"Part 2: {len(all) - len(rocks)}")
 
 
 if __name__ == "__main__":
+    start = time.time()
     solve(get_input())
+    print(time.time() - start)
