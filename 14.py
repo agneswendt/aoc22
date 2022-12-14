@@ -23,13 +23,14 @@ def solve(data):
     rocks |= set((x, max_y + 2) for x in range(0, 1000))
     all = set(x for x in rocks)
     current_sand = (500, 0)
+    min_sand = max_y + 2
     while (500, 0) not in all:
         x, y = current_sand
         if (x, y + 1) in (all):
             if (x - 1, y + 1) in (all):
                 if (x + 1, y + 1) in (all):
                     all.add((x, y))
-                    min_sand = min(all, key=(lambda x: x[1]))[1]
+                    min_sand = y if y < min_sand else min_sand
                     current_sand = (500, min_sand - 1)
                 else:
                     current_sand = (x + 1, y + 1)
