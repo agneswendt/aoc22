@@ -11,7 +11,9 @@ def solve(data):
     rocks = set()
     for line in data:
         for i in range(len(line) - 1):
-            (x1, y1), (x2, y2) = map(int, line[i].split(",")), map(int, line[i + 1].split(","))
+            (x1, y1), (x2, y2) = map(int, line[i].split(",")), map(
+                int, line[i + 1].split(",")
+            )
             (min_x, max_x), (min_y, max_y) = sorted((x1, x2)), sorted((y1, y2))
             rocks |= set(
                 product(range(min_x, max_x + 1), range(min_y, max_y + 1))
